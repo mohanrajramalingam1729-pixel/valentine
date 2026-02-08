@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The "More Than Friends" Upgrade 💕</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --dark-pink: #c9184a;
+            --soft-pink: #ffb3c1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff0f3;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .music-banner {
+            position: fixed;
+            top: 20px;
+            background: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: var(--dark-pink);
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: 2px solid var(--primary-pink);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .floating {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            max-width: 450px;
+            z-index: 10;
+            position: relative;
+            border: 5px solid white;
+        }
+
+        h1 { color: var(--dark-pink); font-size: 2.2em; margin-bottom: 10px; }
+        p { color: #555; font-size: 1.1em; }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            min-height: 150px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .yes-btn {
+            background: var(--primary-pink);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+            z-index: 50;
+        }
+
+        .no-btn {
+            background: #adb5bd;
+            color: white;
+            position: relative;
+            z-index: 40;
+        }
+
+        #celebrate { display: none; }
+
+        #quote-box {
+            background: #fff5f7;
+            border: 2px dashed var(--primary-pink);
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #333;
+            border-radius: 15px;
+            line-height: 1.4;
+            font-size: 1.2em;
+        }
+
+        .contract-text {
+            font-size: 0.8em;
+            margin-top: 25px;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            text-align: left;
+        }
+
+        .special-note {
+            color: var(--dark-pink);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body onclick="startMusic()">
+
+    <div class="music-banner" id="musicPrompt">🎸 Tap to hear our song... 🎵</div>
+
+    <audio id="bgMusic" loop>
+        <source src="C:\Users\ELCOT\Downloads\naan.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="mainCard">
+        <div id="ask">
+            <h1>Will you be my Valentine? 💖</h1>
+            <p>We’ve been besties for long enough. It’s time for a promotion, don’t you think? 😉</p>
+            
+            <div class="buttons">
+                <button class="yes-btn" id="yesBtn" onclick="showCelebration()">YES! 😍</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveNo()">No 😢</button>
+            </div>
+        </div>
+
+        <div id="celebrate">
+            <h1>FINALLY! 🎉</h1>
+            <p class="special-note">Friendship status: Upgraded to "Forever" ❤️</p>
+            
+            <div id="quote-box"></div>
+
+            <div style="font-size: 3.5em;">🎸💍🍦</div>
+            
+            <div class="contract-text">
+                <b>THE "UPGRADE" AGREEMENT</b><br>
+                • <b>Friendzone Status:</b> It didn't disappea; it just moved to the 'Forever' category. I'm keeping the best friend part, but adding a lot of soulmate energy🔒❤️<br>
+                • You are now officially my favorite person to dream about.<br>
+                • I promise to keep being your fav person, just with more hand-holding.<br>
+                • Warning: I might stare at you longer than usual now.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noMessages = [
+            "Friendzone is so last year! 🙄",
+            "Think about our future dog! 🐶",
+            "I'm the only one who gets your jokes! 😂",
+            "But we look so good together... 📸",
+            "I'll delete your favorite playlist! 🎵",
+            "You know you want to say yes... 😏",
+            "Don't make me use my puppy eyes! 🥺",
+            "I've got a seat reserved for you in my heart! 🪑",
+            "Error: Bestie-only mode is disabled. 🚫",
+            "You're stuck with me anyway, might as well make it official! 💍"
+        ];
+        
+        const romanticFunnyQuotes = [
+            "\"You're basically my favorite notification.\"",
+            "\"I promise to always be the person who likes your photos first. Always.\"",
+        ];
+        
+        let messageIndex = 0;
+        let yesScale = 1;
+        let musicStarted = false;
+
+        function startMusic() {
+            if (!musicStarted) {
+                const music = document.getElementById('bgMusic');
+                music.play().catch(() => {});
+                document.getElementById('musicPrompt').style.display = 'none';
+                musicStarted = true;
+            }
+        }
+
+        function moveNo() {
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            if (messageIndex < noMessages.length) {
+                noBtn.innerText = noMessages[messageIndex];
+                messageIndex++;
+            } else {
+                noBtn.innerText = "Just give in! 🥰";
+            }
+
+            yesScale += 0.25;
+            yesBtn.style.transform = `scale(${yesScale})`;
+        }
+
+        function showCelebration() {
+            document.getElementById('ask').style.display = 'none';
+            document.getElementById('celebrate').style.display = 'block';
+            
+            const randomQuote = romanticFunnyQuotes[Math.floor(Math.random() * romanticFunnyQuotes.length)];
+            document.getElementById('quote-box').innerText = randomQuote;
+
+            // Massive explosion of hearts and guitars
+            for(let i=0; i<120; i++) {
+                setTimeout(createFloatingItem, i * 25);
+            }
+        }
+
+        function createFloatingItem() {
+            const items = ['💖', '❤️', '🎸', '✨', '🌹', '🍿'];
+            const item = document.createElement('div');
+            item.className = 'floating';
+            item.innerText = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            item.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(item);
+            
+            setTimeout(() => item.remove(), 5000);
+        }
+
+        setInterval(createFloatingItem, 200);
+    </script>
+</body>
+</html>
