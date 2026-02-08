@@ -141,7 +141,7 @@
 
     <div class="music-banner" id="musicPrompt">🎸 Tap to hear our song... 🎵</div>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop muted>
     <source src="naan.mp3" type="audio/mpeg">
 </audio>
 
@@ -197,14 +197,15 @@
         let yesScale = 1;
         let musicStarted = false;
 
-        function startMusic() {
-            if (!musicStarted) {
-                const music = document.getElementById('bgMusic');
-                music.play().catch(() => {});
-                document.getElementById('musicPrompt').style.display = 'none';
-                musicStarted = true;
-            }
-        }
+       function startMusic() {
+    if (!musicStarted) {
+        const music = document.getElementById('bgMusic');
+        music.muted = false; // This line is the Chrome fix
+        music.play().catch((e) => { console.log("Playback failed: ", e); });
+        document.getElementById('musicPrompt').style.display = 'none';
+        musicStarted = true;
+    }
+}
 
         function moveNo() {
             const noBtn = document.getElementById('noBtn');
@@ -259,6 +260,7 @@
 </body>
 
 </html>
+
 
 
 
