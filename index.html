@@ -135,15 +135,23 @@
             letter-spacing: 1px;
             font-size: 0.9em;
         }
+
+        .msg-btn {
+            background: #25D366;
+            color: white;
+            margin-top: 20px;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
     </style>
 </head>
 <body onclick="startMusic()">
 
-    <div class="music-banner" id="musicPrompt">🎸 Tap to hear our song... 🎵</div>
+    <div class="music-banner" id="musicPrompt">🎸 Tap for a surprise... 🎵</div>
 
     <audio id="bgMusic" loop muted>
-    <source src="naan.mp3" type="audio/mpeg">
-</audio>
+        <source src="naan.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="container" id="mainCard">
         <div id="ask">
@@ -162,11 +170,13 @@
             
             <div id="quote-box"></div>
 
-            <div style="font-size: 3.5em;">🎸💍🍦</div>
+            <button class="msg-btn" onclick="sendMsg()">Send me a text! 💌</button>
+
+            <div style="font-size: 3.5em; margin-top: 20px;">🎸💍🍦</div>
             
             <div class="contract-text">
                 <b>THE "UPGRADE" AGREEMENT</b><br>
-                • <b>Friendzone Status:</b> It didn't disappear; it just moved to the 'Forever' category. I'm keeping the best friend part, but adding a lot of soulmate energy🔒❤️<br>
+                • <b>Friendzone Status:</b> It didn't disappear; it just moved to the 'Forever' category. I'm keeping the best friend part, but adding a lot of soulmate energy 🔒❤️<br>
                 • You are now officially my favorite person to dream about.<br>
                 • I promise to keep being your fav person, just with more hand-holding.<br>
                 • Warning: I might stare at you longer than usual now.
@@ -197,15 +207,15 @@
         let yesScale = 1;
         let musicStarted = false;
 
-       function startMusic() {
-    if (!musicStarted) {
-        const music = document.getElementById('bgMusic');
-        music.muted = false; // This line is the Chrome fix
-        music.play().catch((e) => { console.log("Playback failed: ", e); });
-        document.getElementById('musicPrompt').style.display = 'none';
-        musicStarted = true;
-    }
-}
+        function startMusic() {
+            if (!musicStarted) {
+                const music = document.getElementById('bgMusic');
+                music.muted = false; // Chrome Fix
+                music.play().catch(() => {});
+                document.getElementById('musicPrompt').style.display = 'none';
+                musicStarted = true;
+            }
+        }
 
         function moveNo() {
             const noBtn = document.getElementById('noBtn');
@@ -236,10 +246,16 @@
             const randomQuote = romanticFunnyQuotes[Math.floor(Math.random() * romanticFunnyQuotes.length)];
             document.getElementById('quote-box').innerText = randomQuote;
 
-            // Massive explosion of hearts and guitars
             for(let i=0; i<120; i++) {
                 setTimeout(createFloatingItem, i * 25);
             }
+        }
+
+        function sendMsg() {
+            const phoneNumber = "YOUR_PHONE_NUMBER_HERE"; // Replace with your number (ex: 919876543210)
+            const text = "Hey! Guess what? Your Valentine is waiting... and it's me! I officially accept your upgrade proposal. ❤️✨";
+            const encodedText = encodeURIComponent(text);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedText}`, '_blank');
         }
 
         function createFloatingItem() {
@@ -258,9 +274,4 @@
         setInterval(createFloatingItem, 200);
     </script>
 </body>
-
 </html>
-
-
-
-
